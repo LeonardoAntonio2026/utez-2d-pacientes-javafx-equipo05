@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demolistview.controllers.AppController">
+   <children>
+      <Label fx:id="lblMsg" text="Listado de personas:" />
+       <TextField fx:id="searchBar" promptText="Buscar por correo" />
+      <GridPane>
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <TextField fx:id="txtName" GridPane.columnIndex="1" />
+            <TextField fx:id="txtEmail" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <TextField fx:id="txtAge" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <Label text="Nombre" />
+            <Label text="Email" GridPane.rowIndex="1" />
+            <Label text="Edad" GridPane.rowIndex="2" />
+         </children>
+
+      </GridPane>
+      <HBox prefHeight="100.0" prefWidth="200.0">
+         <children>
+            <Button mnemonicParsing="false" onAction="#loadFromFile" text="Recargar" />
+            <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#onAddPerson" text="Agregar" />
+             <Button mnemonicParsing="false" onAction="#OnUpdate" text="Actualizar" />
+             <Button mnemonicParsing="false" onAction="#OnDelete" text="Eliminar" />
+
+
+         </children>
+      </HBox>
+      <ListView fx:id="listView" prefHeight="200.0" prefWidth="200.0" />
+   </children>
+</VBox>
