@@ -1,6 +1,6 @@
-package com.example.demolistview.controllers;
+package com.example.utez2dpacientesjavafxequipo05.controllers;
 
-import com.example.demolistview.services.PersonService;
+import com.example.utez2dpacientesjavafxequipo05.services.PersonService;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;

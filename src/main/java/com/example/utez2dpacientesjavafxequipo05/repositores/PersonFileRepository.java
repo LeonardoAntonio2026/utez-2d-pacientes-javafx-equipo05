@@ -37,4 +37,9 @@ public class PersonFileRepository {
     public void appendAllLines(List<String> lines) throws IOException{
         Files.write(filePath,lines,
                 StandardCharsets.UTF_8,
-                StandardOpenOption.TRUNCATE_EXISTING);
+                StandardOpenOption.TRUNCATE_EXISTING);
+
+    }
+
+
+}
