@@ -27,7 +27,7 @@ public class PersonService {
     public void addPerson(Paciente paciente) throws IOException {
         validatePerson(paciente);
 
-        // Verificar CURP duplicado
+
         for (Paciente p : getAllCleanLines()) {
             if (p.getCurp().equalsIgnoreCase(paciente.getCurp()))
                 throw new IllegalArgumentException("Ya existe un paciente con ese CURP");

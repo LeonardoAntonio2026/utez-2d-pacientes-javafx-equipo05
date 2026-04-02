@@ -15,15 +15,14 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<VBox prefHeight="400.0" prefWidth="640.0" stylesheets="@estilo.css" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1">
+<VBox prefHeight="400.0" prefWidth="640.0" stylesheets="@estilo.css"
+      xmlns="http://javafx.com/javafx/21"
+      xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.example.utez2dpacientesjavafxequipo05.controllers.FormularioController">
   <children>
     <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
       <children>
-        <Label alignment="CENTER" layoutX="155.0" layoutY="177.0" style="&#10;" text="Drag components from Library here…" textAlignment="CENTER" textFill="#9f9f9f" wrapText="false">
-          <font>
-            <Font size="18.0" />
-          </font>
-        </Label>
+
             <Text layoutY="29.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Datos del paciente" textAlignment="CENTER" wrappingWidth="640.8">
                <font>
                   <Font name="Arial Black" size="27.0" />
@@ -31,44 +30,45 @@
             </Text>
             <HBox layoutY="35.0" prefHeight="318.0" prefWidth="642.0">
                <children>
-                  <VBox prefHeight="364.0" prefWidth="600.0">
+                  <VBox prefHeight="364.0" prefWidth="300.0">
                      <children>
                         <VBox prefHeight="52.0" prefWidth="367.0">
                            <children>
-                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Nombre" wrappingWidth="364.53668785095215" />
-                              <TextField />
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Nombre" />
+                              <TextField fx:id="txtNombre" />
                            </children>
                         </VBox>
-                        <VBox layoutX="10.0" layoutY="10.0" prefHeight="52.0" prefWidth="367.0">
+                        <VBox prefHeight="52.0" prefWidth="367.0">
                            <children>
-                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="CURP" wrappingWidth="364.53668785095215" />
-                              <TextField />
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="CURP" />
+                              <TextField fx:id="txtCurp" />
                            </children>
                         </VBox>
-                        <VBox layoutX="10.0" layoutY="62.0" prefHeight="52.0" prefWidth="367.0">
+                        <VBox prefHeight="52.0" prefWidth="367.0">
                            <children>
-                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Edad" wrappingWidth="364.53668785095215" />
-                              <TextField />
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Edad" />
+                              <TextField fx:id="txtEdad" />
                            </children>
                         </VBox>
-                        <VBox layoutX="10.0" layoutY="114.0" prefHeight="52.0" prefWidth="367.0">
+                        <VBox prefHeight="52.0" prefWidth="367.0">
                            <children>
-                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Telefono" wrappingWidth="364.53668785095215" />
-                              <TextField />
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Teléfono" />
+                              <TextField fx:id="txtTelefono" />
                            </children>
                         </VBox>
-                        <VBox layoutX="10.0" layoutY="166.0" prefHeight="52.0" prefWidth="367.0">
+                        <VBox prefHeight="52.0" prefWidth="367.0">
                            <children>
-                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Alergías" wrappingWidth="364.53668785095215" />
-                              <TextField />
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Alergias" />
+                              <TextField fx:id="txtAlergias" />
                            </children>
                         </VBox>
-                        <VBox layoutX="10.0" layoutY="166.0" prefHeight="52.0" prefWidth="367.0">
+                        <VBox prefHeight="52.0" prefWidth="367.0">
                            <children>
-                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Estatus" wrappingWidth="364.53668785095215" />
-                              <CheckBox mnemonicParsing="false" text="Activo" />
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Estatus" />
+                              <CheckBox fx:id="chkEstatus" mnemonicParsing="false" text="Activo" />
                            </children>
                         </VBox>
+                        <!-- lblError limpio, solo propiedades válidas de Label -->
                      </children>
                   </VBox>
                   <VBox alignment="CENTER" layoutX="175.0" layoutY="10.0" prefHeight="364.0" prefWidth="508.0">
@@ -87,11 +87,14 @@
                                           <Image url="@../images/pngegg.png" />
                                        </image>
                                     </ImageView>
-                                    <Text layoutX="14.0" layoutY="39.0" lineSpacing="5.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ingresa los datos del paciente y agregalo" textAlignment="CENTER" wrappingWidth="140.5367431640625">
+                                    <!-- Text restaurado sin fx:id, solo decorativo -->
+                                    <Label fx:id="lblError" layoutX="14.0" layoutY="39.0" lineSpacing="5.0"
+                                          text="Ingresa los datos del paciente y agrégalo"
+                                          textAlignment="CENTER">
                                        <font>
                                           <Font name="Arial" size="12.0" />
                                        </font>
-                                    </Text>
+                                    </Label>
                                  </children>
                               </Group>
                            </children>
@@ -102,8 +105,9 @@
             </HBox>
             <HBox alignment="CENTER" layoutX="-2.0" layoutY="356.0" prefHeight="68.0" prefWidth="642.0">
                <children>
-                  <Button mnemonicParsing="false" prefHeight="46.0" prefWidth="110.0" text="Cancelar" />
-                  <Button layoutX="276.0" layoutY="21.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="110.0" text="Guardar" />
+                  <!-- onAction conectado al controller -->
+                  <Button mnemonicParsing="false" onAction="#onCancelar" prefHeight="46.0" prefWidth="110.0" text="Cancelar" />
+                  <Button mnemonicParsing="false" onAction="#onGuardar" prefHeight="46.0" prefWidth="110.0" text="Guardar" />
                </children>
                <opaqueInsets>
                   <Insets />

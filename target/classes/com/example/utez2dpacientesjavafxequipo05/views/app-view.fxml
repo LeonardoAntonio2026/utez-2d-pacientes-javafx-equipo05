@@ -13,7 +13,10 @@
 <?import javafx.scene.paint.Stop?>
 <?import javafx.scene.text.Font?>
 
-<VBox prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.utez2dpacientesjavafxequipo05.controllers.AppController">
+<VBox prefHeight="400.0" prefWidth="600.0"
+      xmlns="http://javafx.com/javafx/21"
+      xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.example.utez2dpacientesjavafxequipo05.controllers.AppController">
    <children>
       <Label alignment="CENTER" prefHeight="18.0" prefWidth="600.0" text="FARMACIA - PACIENTES" textAlignment="RIGHT" textOverrun="CLIP">
          <font>
@@ -41,14 +44,14 @@
             <Font name="System Bold" size="13.0" />
          </font>
       </Label>
-      <Label layoutX="10.0" layoutY="84.0" prefHeight="34.0" prefWidth="600.0" text="Total: 0 Activos: 0 Inactivos: 0" />
+      <Label fx:id="lblResumen" prefHeight="34.0" prefWidth="600.0" text="Total: 0 | Activos: 0 | Inactivos: 0" />
       <HBox prefHeight="9.0" prefWidth="600.0" spacing="7.0">
          <children>
             <Button mnemonicParsing="false" onAction="#loadFromFile" text="Recargar" />
-            <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#onAddPerson" text="Nuevo" />
-             <Button mnemonicParsing="false" onAction="#OnUpdate" text="Actualizar" />
-            <Button layoutX="252.0" layoutY="12.0" mnemonicParsing="false" onAction="#OnDelete" text="Cambiar estatus" />
-             <Button mnemonicParsing="false" onAction="#OnDelete" text="Eliminar" />
+            <Button mnemonicParsing="false" onAction="#onAddPerson" text="Nuevo" />
+            <Button mnemonicParsing="false" onAction="#onUpdate" text="Actualizar" />
+            <Button mnemonicParsing="false" onAction="#onChangeEstatus" text="Cambiar estatus" />
+            <Button mnemonicParsing="false" onAction="#onDelete" text="Eliminar" />
 
 
          </children>
@@ -59,17 +62,17 @@
             <Insets bottom="5.0" top="5.0" />
          </padding>
       </HBox>
-      <TableView prefHeight="312.0" prefWidth="600.0">
+      <TableView fx:id="tablePacientes" prefHeight="312.0" prefWidth="600.0">
         <columns>
-          <TableColumn prefWidth="75.0" text="Nombre" />
-          <TableColumn prefWidth="75.0" text="CURP" />
-            <TableColumn prefWidth="75.0" text="Edad" />
-            <TableColumn prefWidth="75.0" text="Telefono" />
-            <TableColumn prefWidth="75.0" text="Alergias" />
-            <TableColumn prefWidth="75.0" text="Estatus" />
+          <TableColumn fx:id="colNombre"   prefWidth="100.0" text="Nombre" />
+          <TableColumn fx:id="colCurp"     prefWidth="130.0" text="CURP" />
+          <TableColumn fx:id="colEdad"     prefWidth="50.0"  text="Edad" />
+          <TableColumn fx:id="colTelefono" prefWidth="100.0" text="Teléfono" />
+          <TableColumn fx:id="colAlergias" prefWidth="100.0" text="Alergias" />
+          <TableColumn fx:id="colEstatus"  prefWidth="80.0"  text="Estatus" />
         </columns>
       </TableView>
-       <TextField fx:id="searchBar" promptText="Buscar por correo" />
-      <Label fx:id="lblMsg" text="Mensaje de error" />
+      <TextField fx:id="searchBar" promptText="Buscar por CURP o nombre" />
+      <Label fx:id="lblMsg" text="" />
    </children>
 </VBox>
