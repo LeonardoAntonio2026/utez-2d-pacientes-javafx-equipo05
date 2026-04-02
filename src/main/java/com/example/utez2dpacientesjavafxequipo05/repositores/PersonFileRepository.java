@@ -1,5 +1,8 @@
 package com.example.utez2dpacientesjavafxequipo05.repositores;
 
+import com.example.utez2dpacientesjavafxequipo05.models.Paciente;
+
+import java.io.BufferedWriter;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
@@ -34,11 +37,23 @@ public class PersonFileRepository {
                 StandardOpenOption.APPEND);
     }
 
-    public void appendAllLines(List<String> lines) throws IOException{
-        Files.write(filePath,lines,
-                StandardCharsets.UTF_8,
-                StandardOpenOption.TRUNCATE_EXISTING);
 
+    public void appendAllLines(List<Paciente> pacientes) throws IOException {
+        Path path = filePath;
+        //Se utiliza BufferedWriter para escribir por cada elemento de pacientes. https://www.w3schools.com/JAVA/java_bufferedwriter.asp
+        try (BufferedWriter writer = Files.newBufferedWriter(path,
+                StandardOpenOption.TRUNCATE_EXISTING,
+                StandardOpenOption.CREATE)) {
+            for (Paciente p : pacientes) {
+                String nameNoComa  = p.getNombre().replace(",", "");
+                String curpNoComa  = p.getCurp().replace(",", "");
+                String alergiasNoComa = p.getAlergias().replace(",", "");
+                writer.write(nameNoComa + "," + curpNoComa + "," + p.getEdad()
+                        + "," + p.getTelefono() + "," + alergiasNoComa + ","
+                        + (p.isActivo() ? "Activo" : "Inactivo"));
+                writer.newLine();
+            }
+        }
     }
 
 

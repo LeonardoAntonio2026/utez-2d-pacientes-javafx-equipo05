@@ -1,7 +1,7 @@
 package com.example.utez2dpacientesjavafxequipo05.services;
 
+import com.example.utez2dpacientesjavafxequipo05.models.Paciente;
 import com.example.utez2dpacientesjavafxequipo05.repositores.PersonFileRepository;
-import com.sun.jdi.connect.Connector;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -9,97 +9,113 @@ import java.util.List;
 
 public class PersonService {
 
-    private PersonFileRepository repo = new PersonFileRepository();
+    private final PersonFileRepository repo = new PersonFileRepository();
 
-    public List<String> loadDataForList() throws IOException {
-        List<String> lines = repo.readAllLines();
-        List<String> result = new ArrayList<>();
-        for (String line : lines){
-            if (line==null || line.isBlank())continue;
+    public List<Paciente> loadDataForList() throws IOException {
+        return getAllCleanLines();
+    }
 
-            String[] parts = line.split(",", -1);
-            String name = parts[0].trim();
-            String correo = parts[1].trim();
-            String edad = parts[2].trim();
-
-            result.add(name+"-"+correo+"-"+edad);
+    public List<Paciente> loadDataForListSearch(String search) throws IOException {
+        List<Paciente> result = new ArrayList<>();
+        for (Paciente p : getAllCleanLines()) {
+            if (p.getCurp().contains(search) || p.getNombre().contains(search))
+                result.add(p);
         }
         return result;
-
     }
 
-    public List<String> loadDataForListSearch(String search) throws IOException {
-        List<String> lines = repo.readAllLines();
-        List<String> result = new ArrayList<>();
-        for (String line : lines){
-            if (line==null || line.isBlank())continue;
+    public void addPerson(Paciente paciente) throws IOException {
+        validatePerson(paciente);
 
-
-            String[] parts = line.split(",", -1);
-            String correo = parts[1].trim();
-            if (!correo.contains(search)) continue;
-            String name = parts[0].trim();
-
-            String edad = parts[2].trim();
-
-            result.add(name+"-"+correo+"-"+edad);
+        // Verificar CURP duplicado
+        for (Paciente p : getAllCleanLines()) {
+            if (p.getCurp().equalsIgnoreCase(paciente.getCurp()))
+                throw new IllegalArgumentException("Ya existe un paciente con ese CURP");
         }
-        return result;
 
+        String nameNoComa     = paciente.getNombre().replace(",", "");
+        String curpNoComa     = paciente.getCurp().replace(",", "");
+        String alergiasNoComa = paciente.getAlergias().replace(",", "");
+
+        repo.appendNewLine(nameNoComa + "," + curpNoComa + "," + paciente.getEdad()
+                + "," + paciente.getTelefono() + "," + alergiasNoComa + ","
+                + (paciente.isActivo() ? "Activo" : "Inactivo"));
     }
 
-    public void addPerson(String name, String email, String age) throws IOException {
-        validatePerson(name,email,age);
-        String nameNoComa = name.replace(",","");
-        String emailNoComa = email.replace(",","");
-        repo.appendNewLine(nameNoComa+","+emailNoComa+","+age);
-    }
+    public void updatePerson(int index, String name, String curp, int edad,
+                             String telefono, String alergias, boolean estatus) throws IOException {
+        if (index < 0) throw new IllegalArgumentException("El índice recibido es inválido");
 
-    public void updatePerson(int index, String name, String email, String age) throws IOException {
-        List<String> lines = getAllCleanLines();
-        if(index == -1){
-            throw new IllegalArgumentException("El indice recibido es invalido");
+        validatePerson(new Paciente(curp, name, edad, telefono, alergias, estatus));
 
-        }
-        lines.set(index,name+","+email+","+ age);
+        List<Paciente> lines = getAllCleanLines();
+        Paciente pacienteEditar = lines.get(index);
+        pacienteEditar.setNombre(name);
+        pacienteEditar.setCurp(curp);
+        pacienteEditar.setEdad(edad);
+        pacienteEditar.setTelefono(telefono);
+        pacienteEditar.setAlergias(alergias);
+        pacienteEditar.setActivo(estatus);
+        lines.set(index, pacienteEditar);
         repo.appendAllLines(lines);
     }
 
-    private List<String> getAllCleanLines() throws IOException{
-        List<String> lines = repo.readAllLines();
-        List<String> cleanLines = new ArrayList<>();
-        for (String line : lines){
-            if(line!=null && !line.isBlank()){
-                cleanLines.add(line);
-            }
-        }
-
-        return cleanLines;
-    }
-    public void validatePerson(String name, String email, String age){
-        if(name.isBlank() || name.length() < 3){
-            throw new IllegalArgumentException("El nombre no cumple con los estanderes");
-        }
-
-        String em = (email==null) ? "" : email.trim();
-        if(em.isBlank() || !em.contains("@") || !em.contains(".")){
-            throw new IllegalArgumentException("El correo es incorrecto");
-        }
-
-        String a = (age==null) ? "" : age.trim();
-        if(a.isBlank() || !a.matches("\\d+")){
-            throw new IllegalArgumentException("La edad debe ser un valor numerico");
-        }
-        int edadNum = Integer.parseInt(a);
-        if(edadNum < 18){
-            throw new IllegalArgumentException("Solo se aceptan mayores de edad (>=18)");
-        }
+    public void changeEstatus(int index) throws IOException {
+        List<Paciente> lines = getAllCleanLines();
+        if (index < 0 || index >= lines.size())
+            throw new IllegalArgumentException("Índice inválido");
+        Paciente p = lines.get(index);
+        p.setActivo(!p.isActivo());
+        repo.appendAllLines(lines);
     }
 
     public void deletePerson(int index) throws IOException {
-        List<String> lines = getAllCleanLines();
+        List<Paciente> lines = getAllCleanLines();
+        if (index < 0 || index >= lines.size())
+            throw new IllegalArgumentException("Índice inválido");
         lines.remove(index);
         repo.appendAllLines(lines);
+    }
 
+    //resumen en pantalla
+    public int countTotal() throws IOException       { return getAllCleanLines().size(); }
+    public long countActivos() throws IOException    { return getAllCleanLines().stream().filter(Paciente::isActivo).count(); }
+    public long countInactivos() throws IOException  { return getAllCleanLines().stream().filter(p -> !p.isActivo()).count(); }
+
+    //obtener todos los pacientes
+    private List<Paciente> getAllCleanLines() throws IOException {
+        List<String> lines = repo.readAllLines();
+        List<Paciente> cleanLines = new ArrayList<>();
+        for (String line : lines) {
+            if (line == null || line.isBlank()) continue;
+            String[] parts = line.split(",", -1);
+            if (parts.length < 6) continue;
+            String name     = parts[0].trim();
+            String curp     = parts[1].trim();
+            int edad        = Integer.parseInt(parts[2].trim());
+            String telefono = parts[3].trim();
+            String alergias = parts[4].trim();
+            boolean estatus = parts[5].trim().equalsIgnoreCase("Activo");
+            cleanLines.add(new Paciente(curp, name, edad, telefono, alergias, estatus));
+        }
+        return cleanLines;
+    }
+
+    public void validatePerson(Paciente paciente) {
+        String name = paciente.getNombre() == null ? "" : paciente.getNombre().trim();
+        if (name.isBlank() || name.length() < 5)
+            throw new IllegalArgumentException("El nombre debe tener al menos 5 caracteres");
+
+        String curp = paciente.getCurp() == null ? "" : paciente.getCurp().trim();
+        if (curp.isBlank())
+            throw new IllegalArgumentException("El CURP no puede estar vacío");
+
+        int edad = paciente.getEdad();
+        if (edad < 0 || edad > 120)
+            throw new IllegalArgumentException("La edad debe estar entre 0 y 120");
+
+        String tel = paciente.getTelefono() == null ? "" : paciente.getTelefono().trim();
+        if (!tel.matches("\\d{10,}"))
+            throw new IllegalArgumentException("El teléfono debe contener solo dígitos y mínimo 10");
     }
 }
