@@ -35,11 +35,16 @@ public class AppController {
 
     @FXML
     public void initialize() {
-        colNombre.setCellValueFactory(new PropertyValueFactory<>("nombre"));
-        colCurp.setCellValueFactory(new PropertyValueFactory<>("curp"));
-        colEdad.setCellValueFactory(new PropertyValueFactory<>("edad"));
-        colTelefono.setCellValueFactory(new PropertyValueFactory<>("telefono"));
-        colAlergias.setCellValueFactory(new PropertyValueFactory<>("alergias"));
+        colNombre.setCellValueFactory( cellData -> new javafx.beans.property.SimpleStringProperty(
+                cellData.getValue().getNombre()));
+        colCurp.setCellValueFactory( cellData -> new javafx.beans.property.SimpleStringProperty(
+                cellData.getValue().getCurp()));
+        colEdad.setCellValueFactory( cellData -> new javafx.beans.property.SimpleIntegerProperty(cellData.getValue().getEdad()).asObject());
+        colTelefono.setCellValueFactory( cellData ->new javafx.beans.property.SimpleStringProperty(
+                cellData.getValue().getTelefono()));
+        colAlergias.setCellValueFactory(cellData ->
+                new javafx.beans.property.SimpleStringProperty(
+                        cellData.getValue().getAlergias()));
         colEstatus.setCellValueFactory(cellData ->
                 new javafx.beans.property.SimpleStringProperty(
                         cellData.getValue().isActivo() ? "Activo" : "Inactivo"));
