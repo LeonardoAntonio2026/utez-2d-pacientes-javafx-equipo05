@@ -35,20 +35,17 @@ public class AppController {
 
     @FXML
     public void initialize() {
-        // Enlazar columnas con propiedades del modelo
         colNombre.setCellValueFactory(new PropertyValueFactory<>("nombre"));
         colCurp.setCellValueFactory(new PropertyValueFactory<>("curp"));
         colEdad.setCellValueFactory(new PropertyValueFactory<>("edad"));
         colTelefono.setCellValueFactory(new PropertyValueFactory<>("telefono"));
         colAlergias.setCellValueFactory(new PropertyValueFactory<>("alergias"));
-        // Columna estatus muestra "Activo" / "Inactivo" como texto
         colEstatus.setCellValueFactory(cellData ->
                 new javafx.beans.property.SimpleStringProperty(
                         cellData.getValue().isActivo() ? "Activo" : "Inactivo"));
 
         tablePacientes.setItems(data);
 
-        // Búsqueda en tiempo real
         searchBar.textProperty().addListener((obs, oldVal, newVal) -> {
             if (newVal == null || newVal.isBlank()) loadFromFile();
             else loadFromFileSearch(newVal.trim());
@@ -96,7 +93,6 @@ public class AppController {
             return;
         }
 
-        // Confirmación antes de eliminar
         Alert confirm = new Alert(Alert.AlertType.CONFIRMATION);
         confirm.setTitle("Confirmar eliminación");
         confirm.setHeaderText("¿Estás seguro de eliminar este paciente?");
@@ -124,12 +120,11 @@ public class AppController {
         }
     }
 
-    // Llamado desde FormularioController al guardar
     public void refreshTable() {
         loadFromFile();
     }
 
-    // --- Privados ---
+
 
     private void loadFromFileSearch(String search) {
         try {

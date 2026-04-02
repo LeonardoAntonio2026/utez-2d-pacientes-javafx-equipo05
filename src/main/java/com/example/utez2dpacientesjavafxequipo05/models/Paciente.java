@@ -17,7 +17,6 @@ public class Paciente {
         this.activo = activo;
     }
 
-    // Getters y Setters
     public String getCurp() { return curp; }
     public void setCurp(String curp) { this.curp = curp; }
     public String getNombre() { return nombre; }

@@ -23,14 +23,13 @@ public class FormularioController {
 
     private final PersonService service = new PersonService();
     private AppController appController;
-    private Paciente pacienteEditar;   // null = modo alta
+    private Paciente pacienteEditar;
     private int indexEditar = -1;
 
     public void setAppController(AppController appController) {
         this.appController = appController;
     }
 
-    /** Si paciente != null, precarga el formulario para edición */
     public void setPaciente(Paciente paciente) throws IOException {
         this.pacienteEditar = paciente;
         if (paciente != null) {
@@ -49,7 +48,7 @@ public class FormularioController {
                 }
             }
         } else {
-            chkEstatus.setSelected(true); // nuevo paciente activo por defecto
+            chkEstatus.setSelected(true);
         }
     }
 

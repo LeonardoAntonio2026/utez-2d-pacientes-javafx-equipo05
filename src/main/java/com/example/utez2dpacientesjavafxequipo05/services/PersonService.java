@@ -77,12 +77,10 @@ public class PersonService {
         repo.appendAllLines(lines);
     }
 
-    //resumen en pantalla
     public int countTotal() throws IOException       { return getAllCleanLines().size(); }
     public long countActivos() throws IOException    { return getAllCleanLines().stream().filter(Paciente::isActivo).count(); }
     public long countInactivos() throws IOException  { return getAllCleanLines().stream().filter(p -> !p.isActivo()).count(); }
 
-    //obtener todos los pacientes
     private List<Paciente> getAllCleanLines() throws IOException {
         List<String> lines = repo.readAllLines();
         List<Paciente> cleanLines = new ArrayList<>();
