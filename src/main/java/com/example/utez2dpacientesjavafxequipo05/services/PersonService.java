@@ -17,9 +17,9 @@ public class PersonService {
 
     public List<Paciente> loadDataForListSearch(String search) throws IOException {
         List<Paciente> result = new ArrayList<>();
-        for (Paciente p : getAllCleanLines()) {
-            if (p.getCurp().contains(search) || p.getNombre().contains(search))
-                result.add(p);
+        for (Paciente paciente : getAllCleanLines()) {
+            if (paciente.getCurp().contains(search) || paciente.getNombre().contains(search))
+                result.add(paciente);
         }
         return result;
     }
@@ -73,7 +73,7 @@ public class PersonService {
         List<Paciente> lines = getAllCleanLines();
         if (index < 0 || index >= lines.size())
             throw new IllegalArgumentException("Índice inválido");
-        lines.remove(index);
+        lines.get(index).setActivo(false);
         repo.appendAllLines(lines);
     }
 

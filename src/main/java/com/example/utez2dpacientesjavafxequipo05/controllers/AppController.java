@@ -99,15 +99,15 @@ public class AppController {
         }
 
         Alert confirm = new Alert(Alert.AlertType.CONFIRMATION);
-        confirm.setTitle("Confirmar eliminación");
-        confirm.setHeaderText("¿Estás seguro de eliminar este paciente?");
+        confirm.setTitle("Confirmar inactivación");
+        confirm.setHeaderText("¿Estás seguro de inactivar este paciente?");
         Optional<ButtonType> result = confirm.showAndWait();
         if (result.isEmpty() || result.get() != ButtonType.OK) return;
 
         try {
             service.deletePerson(index);
             loadFromFile();
-            mostrarExito("Paciente eliminado exitosamente");
+            mostrarExito("Paciente inactivado exitosamente");
         } catch (IOException | IllegalArgumentException e) {
             mostrarError(e.getMessage());
         }
