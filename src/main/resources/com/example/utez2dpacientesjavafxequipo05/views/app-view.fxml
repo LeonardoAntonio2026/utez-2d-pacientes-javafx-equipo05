@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<VBox prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.utez2dpacientesjavafxequipo05.controllers.AppController">
+   <children>
+      <Label alignment="CENTER" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" prefHeight="18.0" prefWidth="600.0" text="FARMACIA - PACIENTES" textAlignment="RIGHT" textFill="#036cff" textOverrun="CLIP">
+         <font>
+            <Font name="Arial Black" size="21.0" />
+         </font>
+      </Label>
+      <Label maxHeight="-Infinity" maxWidth="1.7976931348623157E308" prefHeight="34.0" prefWidth="600.0" text="Estadisticas">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font>
+      </Label>
+      <Label fx:id="lblResumen" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" prefHeight="34.0" prefWidth="600.0" text="Total: 0 | Activos: 0 | Inactivos: 0" />
+      <HBox alignment="CENTER" prefHeight="9.0" prefWidth="600.0" spacing="7.0" style="-fx-background-color: #F4F4F5;">
+         <children>
+            <Button mnemonicParsing="false" onAction="#loadFromFile" text="Recargar">
+               <effect>
+                  <InnerShadow height="9.28" radius="7.07" />
+               </effect></Button>
+            <Button mnemonicParsing="false" onAction="#onAddPerson" text="Nuevo">
+               <effect>
+                  <InnerShadow height="9.28" radius="7.07" />
+               </effect></Button>
+            <Button mnemonicParsing="false" onAction="#onUpdate" text="Actualizar">
+               <effect>
+                  <InnerShadow height="9.28" radius="7.07" />
+               </effect></Button>
+            <Button mnemonicParsing="false" onAction="#onChangeEstatus" text="Cambiar estatus">
+               <effect>
+                  <InnerShadow height="9.28" radius="7.07" />
+               </effect></Button>
+            <Button mnemonicParsing="false" onAction="#onDelete" text="Eliminar">
+               <effect>
+                  <InnerShadow height="9.28" radius="7.07" />
+               </effect></Button>
+
+
+         </children>
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+         <padding>
+            <Insets bottom="5.0" top="5.0" />
+         </padding>
+      </HBox>
+      <TableView fx:id="tablePacientes" prefHeight="312.0" prefWidth="600.0">
+        <columns>
+          <TableColumn fx:id="colNombre" prefWidth="100.0" text="Nombre" />
+          <TableColumn fx:id="colCurp" prefWidth="130.0" text="CURP" />
+          <TableColumn fx:id="colEdad" prefWidth="50.0" text="Edad" />
+          <TableColumn fx:id="colTelefono" prefWidth="100.0" text="Teléfono" />
+          <TableColumn fx:id="colAlergias" prefWidth="100.0" text="Alergias" />
+          <TableColumn fx:id="colEstatus" prefWidth="80.0" text="Estatus" />
+        </columns>
+      </TableView>
+      <TextField fx:id="searchBar" promptText="Buscar por CURP o nombre" />
+      <Label fx:id="lblMsg" text="" />
+   </children>
+</VBox>

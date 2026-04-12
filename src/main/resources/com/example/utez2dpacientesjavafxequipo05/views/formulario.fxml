@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<VBox prefHeight="400.0" prefWidth="640.0" stylesheets="@estilo.css" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.utez2dpacientesjavafxequipo05.controllers.FormularioController">
+  <children>
+    <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
+      <children>
+
+            <Text layoutY="29.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Datos del paciente" textAlignment="CENTER" wrappingWidth="640.8">
+               <font>
+                  <Font name="Arial Black" size="27.0" />
+               </font>
+            </Text>
+            <HBox layoutY="35.0" prefHeight="318.0" prefWidth="642.0">
+               <children>
+                  <VBox prefHeight="318.0" prefWidth="641.0">
+                     <children>
+                        <VBox prefHeight="52.0" prefWidth="367.0">
+                           <children>
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Nombre" />
+                              <TextField fx:id="txtNombre" />
+                           </children>
+                        </VBox>
+                        <VBox prefHeight="52.0" prefWidth="367.0">
+                           <children>
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="CURP" />
+                              <TextField fx:id="txtCurp" />
+                           </children>
+                        </VBox>
+                        <VBox prefHeight="52.0" prefWidth="367.0">
+                           <children>
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Edad" />
+                              <TextField fx:id="txtEdad" />
+                           </children>
+                        </VBox>
+                        <VBox prefHeight="52.0" prefWidth="367.0">
+                           <children>
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Teléfono" />
+                              <TextField fx:id="txtTelefono" />
+                           </children>
+                        </VBox>
+                        <VBox prefHeight="52.0" prefWidth="367.0">
+                           <children>
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Alergias" />
+                              <TextField fx:id="txtAlergias" />
+                           </children>
+                        </VBox>
+                        <VBox prefHeight="52.0" prefWidth="367.0">
+                           <children>
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Estatus" />
+                              <CheckBox fx:id="chkEstatus" mnemonicParsing="false" text="Activo" />
+                           </children>
+                        </VBox>
+                     </children>
+                  </VBox>
+                  <VBox alignment="CENTER" layoutX="175.0" layoutY="10.0" prefHeight="364.0" prefWidth="508.0">
+                     <children>
+                        <Pane prefHeight="198.0" prefWidth="275.0">
+                           <children>
+                              <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="-6.0" layoutY="37.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../images/dr-simi.png" />
+                                 </image>
+                              </ImageView>
+                              <Group layoutX="91.0" layoutY="-61.0">
+                                 <children>
+                                    <ImageView fitHeight="122.0" fitWidth="187.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../images/pngegg.png" />
+                                       </image>
+                                    </ImageView>
+                                    <Label fx:id="lblError" layoutX="14.0" layoutY="25.0" lineSpacing="5.0" prefHeight="60" prefWidth="150" text="Ingresa los datos del paciente y agrégalo" textAlignment="CENTER" wrapText="true">
+                                       <font>
+                                          <Font name="Arial" size="12.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </Group>
+                           </children>
+                        </Pane>
+                     </children>
+                  </VBox>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" layoutX="-2.0" layoutY="356.0" prefHeight="68.0" prefWidth="642.0">
+               <children>
+                  <Button mnemonicParsing="false" onAction="#onCancelar" prefHeight="46.0" prefWidth="110.0" text="Cancelar" />
+                  <Button mnemonicParsing="false" onAction="#onGuardar" prefHeight="46.0" prefWidth="110.0" text="Guardar" />
+               </children>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+            </HBox>
+      </children>
+    </AnchorPane>
+  </children>
+</VBox>
