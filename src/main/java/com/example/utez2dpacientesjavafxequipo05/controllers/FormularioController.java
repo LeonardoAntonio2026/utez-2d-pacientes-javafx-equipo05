@@ -30,7 +30,7 @@ public class FormularioController {
         this.appController = appController;
     }
 
-    /** Si paciente != null, precarga el formulario para edición */
+    // Si paciente != null, precarga el formulario para edición
     public void setPaciente(Paciente paciente) throws IOException {
         this.pacienteEditar = paciente;
         if (paciente != null) {
@@ -49,7 +49,7 @@ public class FormularioController {
                 }
             }
         } else {
-            chkEstatus.setSelected(true); // nuevo paciente activo por defecto
+            chkEstatus.setSelected(true); 
         }
     }
 
@@ -65,6 +65,12 @@ public class FormularioController {
         try {
             int edad = Integer.parseInt(edadStr);
             Paciente p = new Paciente(curp, nombre, edad, telefono, alergias, activo);
+
+            for (Paciente existente : service.loadDataForList()) {
+                if (existente.getCurp().equalsIgnoreCase(curp) && (pacienteEditar == null || !existente.getCurp().equalsIgnoreCase(pacienteEditar.getCurp()))) {
+                    throw new IllegalArgumentException("Ya existe un paciente con ese CURP");
+                }
+            }
 
             if (pacienteEditar == null) {
                 service.addPerson(p);
