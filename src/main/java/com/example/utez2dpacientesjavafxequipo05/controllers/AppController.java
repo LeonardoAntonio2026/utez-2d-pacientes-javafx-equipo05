@@ -52,8 +52,11 @@ public class AppController {
         tablePacientes.setItems(data);
 
         searchBar.textProperty().addListener((obs, oldVal, newVal) -> {
-            if (newVal == null || newVal.isBlank()) loadFromFile();
-            else loadFromFileSearch(newVal.trim());
+            if (newVal == null || newVal.isBlank()) {
+                loadFromFile();
+            } else {
+                loadFromFileSearch(newVal.trim());
+            }
         });
 
         loadFromFile();
@@ -102,7 +105,9 @@ public class AppController {
         confirm.setTitle("Confirmar inactivación");
         confirm.setHeaderText("¿Estás seguro de inactivar este paciente?");
         Optional<ButtonType> result = confirm.showAndWait();
-        if (result.isEmpty() || result.get() != ButtonType.OK) return;
+        if (result.isEmpty() || result.get() != ButtonType.OK) {
+            return;
+        }
 
         try {
             service.deletePerson(index);

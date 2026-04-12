@@ -18,8 +18,9 @@ public class PersonService {
     public List<Paciente> loadDataForListSearch(String search) throws IOException {
         List<Paciente> result = new ArrayList<>();
         for (Paciente paciente : getAllCleanLines()) {
-            if (paciente.getCurp().contains(search) || paciente.getNombre().contains(search))
+            if (paciente.getCurp().contains(search) || paciente.getNombre().contains(search)) {
                 result.add(paciente);
+            }
         }
         return result;
     }
@@ -29,8 +30,9 @@ public class PersonService {
 
 
         for (Paciente p : getAllCleanLines()) {
-            if (p.getCurp().equalsIgnoreCase(paciente.getCurp()))
+            if (p.getCurp().equalsIgnoreCase(paciente.getCurp())) {
                 throw new IllegalArgumentException("Ya existe un paciente con ese CURP");
+            }
         }
 
         String nameNoComa     = paciente.getNombre().replace(",", "");
@@ -44,7 +46,9 @@ public class PersonService {
 
     public void updatePerson(int index, String name, String curp, int edad,
                              String telefono, String alergias, boolean estatus) throws IOException {
-        if (index < 0) throw new IllegalArgumentException("El índice recibido es inválido");
+        if (index < 0) {
+            throw new IllegalArgumentException("El índice recibido es inválido");
+        }
 
         validatePerson(new Paciente(curp, name, edad, telefono, alergias, estatus));
 
@@ -62,8 +66,9 @@ public class PersonService {
 
     public void changeEstatus(int index) throws IOException {
         List<Paciente> lines = getAllCleanLines();
-        if (index < 0 || index >= lines.size())
+        if (index < 0 || index >= lines.size()) {
             throw new IllegalArgumentException("Índice inválido");
+        }
         Paciente p = lines.get(index);
         p.setActivo(!p.isActivo());
         repo.appendAllLines(lines);
@@ -71,8 +76,9 @@ public class PersonService {
 
     public void deletePerson(int index) throws IOException {
         List<Paciente> lines = getAllCleanLines();
-        if (index < 0 || index >= lines.size())
+        if (index < 0 || index >= lines.size()) {
             throw new IllegalArgumentException("Índice inválido");
+        }
         lines.get(index).setActivo(false);
         repo.appendAllLines(lines);
     }
@@ -85,9 +91,13 @@ public class PersonService {
         List<String> lines = repo.readAllLines();
         List<Paciente> cleanLines = new ArrayList<>();
         for (String line : lines) {
-            if (line == null || line.isBlank()) continue;
+            if (line == null || line.isBlank()) {
+                continue;
+            }
             String[] parts = line.split(",", -1);
-            if (parts.length < 6) continue;
+            if (parts.length < 6) {
+                continue;
+            }
             String name     = parts[0].trim();
             String curp     = parts[1].trim();
             int edad        = Integer.parseInt(parts[2].trim());
@@ -101,19 +111,23 @@ public class PersonService {
 
     public void validatePerson(Paciente paciente) {
         String name = paciente.getNombre() == null ? "" : paciente.getNombre().trim();
-        if (name.isBlank() || name.length() < 5)
+        if (name.isBlank() || name.length() < 5){
             throw new IllegalArgumentException("El nombre debe tener al menos 5 caracteres");
-
+        }
         String curp = paciente.getCurp() == null ? "" : paciente.getCurp().trim();
-        if (curp.isBlank())
+        if (curp.isBlank()){
             throw new IllegalArgumentException("El CURP no puede estar vacío");
-
+        }
         int edad = paciente.getEdad();
-        if (edad < 0 || edad > 120)
+        if (edad < 0 || edad > 120){
             throw new IllegalArgumentException("La edad debe estar entre 0 y 120");
-
+        }
+        if (paciente.getAlergias() == null){
+            paciente.setAlergias("Ninguna");
+        }
         String tel = paciente.getTelefono() == null ? "" : paciente.getTelefono().trim();
-        if (!tel.matches("\\d{10,}"))
+        if (!tel.matches("\\d{10,}")){
             throw new IllegalArgumentException("El teléfono debe contener solo dígitos y mínimo 10");
+        }
     }
 }

@@ -78,7 +78,9 @@ public class FormularioController {
                 service.updatePerson(indexEditar, nombre, curp, edad, telefono, alergias, activo);
             }
 
-            if (appController != null) appController.refreshTable();
+            if (appController != null) {
+                appController.refreshTable();
+            }
             cerrarVentana();
 
         } catch (NumberFormatException e) {
