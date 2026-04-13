@@ -4,26 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="bdcc4520-25c1-42c4-b944-8bcf8107d930" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/data/img.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/img_1.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/img_2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/img_3.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/img_4.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/img_5.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/img_6.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/img_7.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/img_8.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/persons.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/persons.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/utez2dpacientesjavafxequipo05/models/Paciente.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/utez2dpacientesjavafxequipo05/models/Paciente.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/utez2dpacientesjavafxequipo05/services/PersonService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/utez2dpacientesjavafxequipo05/services/PersonService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/utez2dpacientesjavafxequipo05/views/formulario.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/utez2dpacientesjavafxequipo05/views/formulario.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/utez2dpacientesjavafxequipo05/views/formulario.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/utez2dpacientesjavafxequipo05/views/formulario.fxml" afterDir="false" />
-    </list>
+    <list default="true" id="bdcc4520-25c1-42c4-b944-8bcf8107d930" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -54,7 +35,7 @@
     "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
     "RunOnceActivity.git.unshallow": "true",
     "RunOnceActivity.typescript.service.memoryLimit.init": "true",
-    "git-widget-placeholder": "hugordito/Hugo-Ramirez",
+    "git-widget-placeholder": "LeonardoAntonio2026/Leonardo-Arroyo",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "C:/Users/PC/OneDrive/Documentos/utez-2d-pacientes-javafx-equipo05",
     "nodejs_package_manager_path": "npm",
