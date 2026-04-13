@@ -36,7 +36,7 @@
                         <VBox prefHeight="52.0" prefWidth="367.0">
                            <children>
                               <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Edad" />
-                              <TextField fx:id="txtEdad" />
+                              <TextField fx:id="txtEdad" promptText="10 digitos" />
                            </children>
                         </VBox>
                         <VBox prefHeight="52.0" prefWidth="367.0">

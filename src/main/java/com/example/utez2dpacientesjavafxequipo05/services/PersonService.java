@@ -17,8 +17,9 @@ public class PersonService {
 
     public List<Paciente> loadDataForListSearch(String search) throws IOException {
         List<Paciente> result = new ArrayList<>();
+        String searchLower = search.toLowerCase();
         for (Paciente paciente : getAllCleanLines()) {
-            if (paciente.getCurp().contains(search) || paciente.getNombre().contains(search)) {
+            if (paciente.getCurp().toLowerCase().contains(searchLower) || paciente.getNombre().toLowerCase().contains(searchLower)) {
                 result.add(paciente);
             }
         }
@@ -122,11 +123,12 @@ public class PersonService {
         if (edad < 0 || edad > 120){
             throw new IllegalArgumentException("La edad debe estar entre 0 y 120");
         }
-        if (paciente.getAlergias() == null){
+        if (paciente.getAlergias() == null || paciente.getAlergias().isBlank()){
             paciente.setAlergias("Ninguna");
         }
         String tel = paciente.getTelefono() == null ? "" : paciente.getTelefono().trim();
-        if (!tel.matches("\\d{10,}")){
+        //si los caracteres del telefono no son todos numeros se mandara error
+        if (tel.isBlank() || tel.length() < 10 || !tel.chars().allMatch(Character::isDigit)) {
             throw new IllegalArgumentException("El teléfono debe contener solo dígitos y mínimo 10");
         }
     }

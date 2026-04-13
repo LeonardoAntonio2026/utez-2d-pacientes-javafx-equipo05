@@ -30,19 +30,5 @@ public class Paciente {
     public boolean isActivo() { return activo; }
     public void setActivo(boolean activo) { this.activo = activo; }
 
-    public String toCSV() {
-        return curp + "," + nombre + "," + edad + "," + telefono + "," + alergias + "," + (activo ? "1" : "0");
-    }
-
-    public static Paciente fromCSV(String line) {
-        String[] parts = line.split(",", -1);
-        return new Paciente(
-                parts[0].trim(),
-                parts[1].trim(),
-                Integer.parseInt(parts[2].trim()),
-                parts[3].trim(),
-                parts[4].trim(),
-                parts[5].trim().equals("1")
-        );
-    }
+   
 }
